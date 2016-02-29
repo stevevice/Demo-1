@@ -1,0 +1,170 @@
+Andrew Miller
+
+Version Control:
+
+Commands:
+cd - Can be used to change directories
+mkdir - Make a new directory
+ls - Shows everything inside current directory
+git init -Initializes a git repository
+git clone - Downloads the repository that is on the github website
+git remote add origin - Used when you want to add a reference to a repo on the github website
+git Add - Adds files to be staged and ready for committing
+git commit -m - Commits all files that were added and gets them ready to be pushed. The -m flag allows you to put in a commit message
+git push origin master - Pushes all commits to the remote online
+git pull origin master - Pull any changes that were made to the online repo and bring them into the local repo
+git branch - Shows all branches on the local machine
+git checkout - Allows user to manipulate branches
+git merge - Merges specified branch with branch user is currently on
+git reset HEAD <filename> - Removes specified file from staging area
+git status- Shows the status of files
+git log - Shows a listing of commits on a branch including the corresponding details
+git rm - Removes files from the working directory and that have been added to the index
+touch - Creates a file
+git remote - list of remotes
+vim - An editor that allows you to edit a file from inside the shell
+When inside the editor:
+j = down
+k = up
+h = left
+l = right
+i = insert mode
+:wq = save and quit
+:q! = cancel and quit
+
+Flags:
+-m - Add a message to a commit when using git commit
+-v - List URLS when used with git remote
+-b - Create a new branch when used with git branch 
+--no-ff - This is referring to a pull request 
+
+Steps to using version control:
+
+1.Create an online repository
+Comment: This is your remote repository. This is the one that is online.
+
+- Go to GitHub.com and click repositories tab. Now click the Green New icon under the edit profile icon.
+- Give the repository a name.
+- Click in the circle next to public 
+- Now click the create a repository button at the bottom
+- After creating the repository copy the link that is next to the "set up in desktop button"
+
+2. Creating a local repository
+Comment: Creating the repository to work out of
+
+- Go to git shell 
+- (optional) Make a new folder in a directory that you want
+- (optional) Type mkdir <Now name your new folder here>
+- (optional) Now change to the new folder directory you just created
+- Pick a directory you want to download the project to
+- Type in git clone <paste URL here that you copied from github> 
+- Now hit enter
+- Now type touch file.txt then hit enter (This line of text creates a new file)
+- Now type git init (This initializes the current directory as a github repository)
+- Local repo is now created
+
+3. Add a remote
+Comment: A Remote is the online repository that we will be linking to so we can push our work to from our local repo as well as even pull from.
+
+- Type git remote add origin <Here is where the copied URL goes> then hit enter
+- The URL is the link we will be using and origin will be the name we reference it as
+- Note: origin can be named anything! It is just good practice to name your first remote origin
+
+4. Adding Files
+Comment: Adding files to the repo
+- Type git add <specify file> then hit enter
+- Now the files have been staged for committing to the online remote
+
+5. Committing Files
+Comment: Committing your changes locally
+- After files have been staged then you will need to commit them at some point
+- Committing puts the changes into your local repo
+- Type git commit -m "enter a message here" then hit enter
+
+6. Pushing files to the remote
+Comment: After you have made added files and/or committed files then next you can push everything up to the online remote using push
+- Type git push origin master (This uploads all the content to your master branch(repo)) then hit enter
+- Now if you go to your github page and look in this repository you will see all of your changes
+
+7. Pulling changes from the remote
+Comment: Whenever you want changes from the remote put into your local repo.
+- Go to git shell
+- Type git pull origin master (This means you will be getting all and any changes from your remote repo put into your local repo)
+
+
+Version Collaboration:
+
+1. Set Up A Working Copy On Your Computer
+
+- Fork the project you want to collaborate with
+- Now go to your forked copy and look for the URL in the page and click the 
+clipboard next to it to copy the link
+- Now go to git shell
+- Type git clone <paste URL here> then hit enter
+- Now we need to set up a new remote that points to the original project so that you can grab any changes and bring them into your local copy. 
+Click on the link to the original repository – it's labeled "Forked from" at the top of the GitHub page. 
+Now look for the URL and click the clipboard icon next to it and we will use it to create the new remote, which we'll call upstream.
+- Now go back to git shell and type git remote add upstream <paste URL here> then hit enter
+- Now we have 2 remotes for this project:
+ Origin - Which points to the GitHub fork of the project. This is the remote we can read and write to.
+ Upstream - which points to the main project's GitHub repo. We can only read from this repo. 
+
+2. Time To Work
+
+- First we make sure we are on the master branch - Type git checkout master
+- Now type git pull upstream master - This will sync our local repo with the upstream project
+- Now type git push origin master - This will sync our local repo with the our forked GitHub remote
+- Now type git checkout -b <name your branch> -This will create a branch and switch to it from the current branch we are on
+- Do some work here
+
+
+3. Pull Request
+
+- To create a pull request we first need to push the branch to the origin remote
+- Type git push -u origin <branch name> then hit enter 
+- Now our branch has been created on our GitHub project.
+Note: The -u flag links this branch with the remote, so in the future we can just type git push origin
+- Now go back to GitHub and navigate to your fork of the project and you will see that the new branch is listed at the top
+- Now click the button next to it called "Compare and pull request"
+- Now give the pull request a title and a good description
+- When done, click the "Create pull request" button at the bottom
+
+4. Review By Owner
+
+- For your work to be integrated into the project, the owner will review your work and either request changes or merge it.
+
+5. Being The Owner
+- When someone sends you a pull request, review and decide if you want the changes or not
+- If you want the changes and their are no conflicts, then click "Pull requests" under your repository name
+- Now click the pull request you would like to merge
+- Click Merge pull request
+- Type a commit message
+- Click "Confirm merge"
+
+6. Merge Conflicts
+- If there were merge conflicts, you will not be able to merge the pull request on the GitHub site.
+They will need to be fixed before the merge will work and this will need to be done on the command line, so back to git shell.
+- First, make sure you have the latest master in your local repo.
+- Type git checkout master then hit enter
+- Type git pull origin master
+- Now switch back to the branch you are trying to merge
+- Type git checkout <branch name> then hit enter
+- Type git merge master - This will fail because we have conflicts and it will tell you which files you need
+to look at to resolve the conflicts
+- Open up the file in your text editor
+- Type vim <filename> then hit enter
+- Now that the file is open look for the <<<< indicating a conflict
+- Fix any issues you have and exit the editor
+- Now type git add <filename> then hit enter
+- The file has been staged
+- Now type git commit -m "put a message here" then hit enter
+- Now type git checkout master then enter - To switch back to the master branch
+- Type git merge --no-ff <branch name> then hit enter (The --no-ff means pull request)
+- Type git push origin master
+
+Notes:
+- If working out of a local repo from a forked repo, make a branch and make all changes into it, then push that branch to the forked repo remote.
+- When you are ready for someone else to use your work, then send them a pull request.
+When they accept the pull request they can merge the request into the master branch.
+Then you can go into your local repo and pull from the master branch and get the changes
+- Whether forked or cloned, the person or people will need to submit a pull request in order to make changes to the original project.
